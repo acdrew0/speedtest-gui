@@ -60,23 +60,18 @@ def execute_test():
     execute_button.config(state="disabled")
     
     s = speedtest.Speedtest()
+    
+    first_line = []
 
-    file = pathlib.Path("speedtest.csv")
+    file = pathlib.Path("Speedtest.csv")
 
     if file.exists():
         with open('Speedtest.csv','r') as f:
             reader = csv.reader(f)
             first_line = next(reader)
-
-        if(first_line != ['Date', 'Time', 'Download', 'Upload']):   
+    
+    if(first_line != ['Date', 'Time', 'Download', 'Upload']):   
             with open('Speedtest.csv','w',newline='') as f:
-                writer = csv.writer(f,  escapechar=' ', quoting=csv.QUOTE_NONE)
-
-                entry = ["Date","Time","Download","Upload"]
-
-                writer.writerow(entry)
-    else:
-        with open('Speedtest.csv','w',newline='') as f:
                 writer = csv.writer(f,  escapechar=' ', quoting=csv.QUOTE_NONE)
 
                 entry = ["Date","Time","Download","Upload"]
@@ -89,8 +84,8 @@ def execute_test():
 
             writer = csv.writer(f,  escapechar=' ', quoting=csv.QUOTE_NONE)   
 
-            down = s.download(threads=1)/1000000
-            up = s.upload(threads=1)/1000000
+            down = s.download()/1000000
+            up = s.upload()/1000000
 
             current_speed.config( text = "D: " + str(truncate(down,2)) + "\nU: " + str(truncate(up,2)) )
 
