@@ -43,7 +43,7 @@ def graph():
     data = pd.read_csv('Speedtest.csv')
 
     #plot
-    plt.figure(figsize=(6.8,4.2))
+    plt.figure()
     plt.plot(data['Time'],data['Download'], label="Download")
     plt.plot(data['Time'],data['Upload'], label="Upload")
     plt.xlabel('Time')
